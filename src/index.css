@@ -11,3 +11,21 @@
   --color-text-main: #1b0d12;
   --color-text-muted: #6b3c4a;
 }
+
+@layer base {
+  body {
+    @apply bg-app-bg text-text-main antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    @apply flex flex-col min-h-screen;
+  }
+
+  button,
+  input,
+  textarea {
+    font-family: inherit;
+  }
+}

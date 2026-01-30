@@ -1,11 +1,13 @@
-import { Cake } from "lucide-react";
+import { Header } from "./components/Header";
 
 function App() {
   return (
-    <main>
-      <Cake className="text-primary" />
-      <h1>Birthday Planner</h1>
-    </main>
+    <>
+      <Header />
+      <main className="flex-1 bg-secondary">
+        <p>Welcome to the Birthday Planner app!</p>
+      </main>
+    </>
   );
 }
 
