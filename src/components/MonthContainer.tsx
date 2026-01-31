@@ -1,6 +1,6 @@
 import type { MonthCount } from "../data/mockFriends";
 import { EmptyMonthContainer } from "./EmptyMonthContainer";
-import FriendInfo from "./FriendInfo";
+import { FriendInfo } from "./FriendInfo";
 
 interface MonthContainerProps {
   monthBirthdays: MonthCount;

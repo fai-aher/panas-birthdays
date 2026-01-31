@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { getMonthsWithCounts } from "../data/mockFriends";
 import { MonthContainer } from "./MonthContainer";
 
-function CalendarContainer() {
+export function CalendarContainer() {
   const calendarInfo = useMemo(() => getMonthsWithCounts(), []);
 
   return (
@@ -13,5 +13,3 @@ function CalendarContainer() {
     </section>
   );
 }
-
-export default CalendarContainer;

@@ -4,7 +4,7 @@ interface FriendInfoProps {
   friend: Friend;
 }
 
-function FriendInfo({ friend }: FriendInfoProps) {
+export function FriendInfo({ friend }: FriendInfoProps) {
   const calculateNextAge = () => {
     const today = new Date();
     const currentYear = today.getFullYear();
@@ -19,12 +19,14 @@ function FriendInfo({ friend }: FriendInfoProps) {
   };
 
   return (
-    <div className="group flex items-center gap-3 p-2 rounded-lg hover:bg-card transition-all cursor-pointer">
+    <div className="group flex items-center gap-3 p-2 rounded-lg hover:bg-card transition-all">
       <div
         className="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 ring-2 ring-background shrink-0"
         style={{
           backgroundImage: `url("${friend.profilePicture}")`,
         }}
+        aria-label={`${friend.name}'s profile picture`}
+        role="img"
       ></div>
       <div className="flex-1 min-w-0">
         <p className="text-foreground text-sm font-semibold truncate">
@@ -40,5 +42,3 @@ function FriendInfo({ friend }: FriendInfoProps) {
     </div>
   );
 }
-
-export default FriendInfo;
