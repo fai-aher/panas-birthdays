@@ -1,4 +1,5 @@
 import { Calendar, PartyPopper, TrendingUp, User } from "lucide-react";
+import CalendarContainer from "./components/CalendarContainer";
 import { Header } from "./components/Header";
 import { MetricCard } from "./components/MetricCard";
 
@@ -38,6 +39,8 @@ function App() {
             </div>
           </MetricCard>
         </section>
+
+        <CalendarContainer />
       </main>
     </>
   );

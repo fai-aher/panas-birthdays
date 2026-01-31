@@ -5,11 +5,14 @@
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --color-primary: #ff4d8d;
+  --color-primary: #ee2b6c;
   --color-secondary: #fff0f5;
-  --color-background: #fdf8f9;
+  --color-background: #f8f6f6;
   --color-foreground: #1b0d12;
+  --color-muted: #f3e7eb;
   --color-muted-foreground: #6b3c4a;
+  --color-card: #ffffff;
+  --color-border: #f3e7eb;
 }
 
 @layer base {
