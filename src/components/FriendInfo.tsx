@@ -1,23 +1,11 @@
 import type { Friend } from "../data/mockFriends";
+import { calculateNextAge } from "../utils/friendUtils";
 
 interface FriendInfoProps {
   friend: Friend;
 }
 
 export function FriendInfo({ friend }: FriendInfoProps) {
-  const calculateNextAge = () => {
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const birthYear = friend.birthDate.getFullYear();
-    const birthMonth = friend.birthDate.getMonth();
-    const birthDay = friend.birthDate.getDate();
-
-    const birthdayThisYear = new Date(currentYear, birthMonth, birthDay);
-    const hasBirthdayPassed = today > birthdayThisYear;
-
-    return currentYear - birthYear + (hasBirthdayPassed ? 1 : 0);
-  };
-
   return (
     <div className="group flex items-center gap-3 p-2 rounded-lg hover:bg-card transition-all">
       <div
@@ -33,7 +21,7 @@ export function FriendInfo({ friend }: FriendInfoProps) {
           {friend.name}
         </p>
         <p className="text-muted-foreground text-xs truncate">
-          Turning {calculateNextAge()}
+          Turning {calculateNextAge(friend)}
         </p>
       </div>
       <div className="shrink-0 bg-primary/10 text-primary px-2 py-1 rounded text-xs font-bold">
