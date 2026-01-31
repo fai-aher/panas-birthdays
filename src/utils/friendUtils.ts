@@ -124,7 +124,7 @@ export const getRelativeBirthdayText = (days: number): string => {
     return `In ${weeks} week${weeks > 1 ? "s" : ""}`;
   }
   const averageDaysPerMonth = 365.25 / 12;
-  const months = Math.round(days / averageDaysPerMonth) || 1;
+  const months = Math.round(days / averageDaysPerMonth);
   return `In ${months} month${months > 1 ? "s" : ""}`;
 };
 
