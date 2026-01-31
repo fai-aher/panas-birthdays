@@ -25,7 +25,7 @@ export const mockFriends: Friend[] = [
     name: "Mike Ross",
     profilePicture:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAribFWBQAYv5WdvGwvbhulzPGz3KtK22BPrb2RMjTKfGtP_3oGjpSHltIjzZlKna16yC9k41as10B_2VgsK1ORy5-l1KwRkSmb0rYv78LUd58ze8DIM50lX7blHKTttUhLeuTDyIz6eD-ljLrExIDksqiCNynG6fxX9O8Pzb6YzrJY2rK9Jc5DsQTlnd8oPvbQbwXu79e_BVxSY4AnEqBaRtJmbSeANd7FkxyBEGMfBvMwXVP7sUXngiinvNdLWevNUJ6hUsNBvDN8",
-    birthDate: new Date(1995, 0, 28),
+    birthDate: new Date(2001, 0, 28),
   },
 
   // March
@@ -118,7 +118,7 @@ export const mockFriends: Friend[] = [
     name: "Taylor Swift",
     profilePicture:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuACNdNQgCC6MGpbBXdU8CKGhpazWEHBUUw21me22D-ObdESu1XK-wOmD_TVvc4n_L32GK7K9R7e1Z3RLXJxnqF5L6gPkxjjbuwJv9SYaAAJwH_mxf_Om6ORtv-GgH9le6rfL9NEIb7SBPUYDm_scoUhRLSlg0ZDxIyT-p1uv3k4pJ1cPaBINVN84RKyh2a5-lfW5ntZ9t3pVzOb648izTT_61dN-ua0uDRlwv8Krd9pnOY5JTKcI1R6cbtF6hCoiwSpVx9HC6PM3kyp",
-    birthDate: new Date(1989, 11, 13),
+    birthDate: new Date(2001, 11, 9),
   },
   {
     id: "14",
