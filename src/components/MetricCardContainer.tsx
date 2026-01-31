@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Calendar, PartyPopper, TrendingUp, User } from "lucide-react";
 import { mockFriends } from "../data/mockFriends";
 import {
@@ -11,16 +12,27 @@ import {
 import { MetricCard } from "./MetricCard";
 
 export function MetricCardContainer() {
-  const friends = mockFriends;
-  const nextFriend = getNextBirthdayFriend(friends);
-  const thisMonthCount = getFriendsThisMonth(friends).length;
-  const mostCommonAge = getMostCommonAge(friends);
-  const milestoneCount = getMilestoneCount(friends);
+  const nextFriend = useMemo(
+    () => getNextBirthdayFriend(mockFriends),
+    [],
+  );
+  const thisMonthCount = useMemo(
+    () => getFriendsThisMonth(mockFriends).length,
+    [],
+  );
+  const mostCommonAge = useMemo(
+    () => getMostCommonAge(mockFriends),
+    [],
+  );
+  const milestoneCount = useMemo(
+    () => getMilestoneCount(mockFriends),
+    [],
+  );
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto max-w-400">
       <MetricCard title="Total Friends" icon={User}>
-        <p className="text-foreground text-3xl font-bold">{friends.length}</p>
+        <p className="text-foreground text-3xl font-bold">{mockFriends.length}</p>
       </MetricCard>
 
       <MetricCard title="Next Up" icon={PartyPopper}>

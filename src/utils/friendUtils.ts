@@ -59,8 +59,10 @@ export const calculateNextAge = (friend: Friend): number => {
   const birthMonth = friend.birthDate.getMonth();
   const birthDay = friend.birthDate.getDate();
 
+  // Normalize to midnight for day-based comparison
+  const todayMidnight = new Date(currentYear, today.getMonth(), today.getDate());
   const birthdayThisYear = new Date(currentYear, birthMonth, birthDay);
-  const hasBirthdayPassed = today > birthdayThisYear;
+  const hasBirthdayPassed = todayMidnight > birthdayThisYear;
 
   return currentYear - birthYear + (hasBirthdayPassed ? 1 : 0);
 };
@@ -76,15 +78,21 @@ export const daysUntilBirthday = (friend: Friend): number => {
   const birthMonth = friend.birthDate.getMonth();
   const birthDay = friend.birthDate.getDate();
 
+  // Normalize today's date to midnight for day-based comparison
+  const todayMidnight = new Date(currentYear, today.getMonth(), today.getDate());
+
   let nextBirthday = new Date(currentYear, birthMonth, birthDay);
 
   // If birthday has passed this year, calculate for next year
-  if (today > nextBirthday) {
+  if (todayMidnight > nextBirthday) {
     nextBirthday = new Date(currentYear + 1, birthMonth, birthDay);
   }
 
-  const diffTime = nextBirthday.getTime() - today.getTime();
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffTime = nextBirthday.getTime() - todayMidnight.getTime();
+  const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  // Handle edge case where birthday is today
+  return days === 0 ? 0 : days;
 };
 
 /**
@@ -111,9 +119,13 @@ export const getRelativeBirthdayText = (days: number): string => {
   if (days === 0) return "Today";
   if (days === 1) return "Tomorrow";
   if (days <= 7) return `In ${days} days`;
-  if (days <= 30)
-    return `In ${Math.floor(days / 7)} week${Math.floor(days / 7) > 1 ? "s" : ""}`;
-  return `In ${Math.floor(days / 30)} month${Math.floor(days / 30) > 1 ? "s" : ""}`;
+  if (days <= 27) {
+    const weeks = Math.round(days / 7);
+    return `In ${weeks} week${weeks > 1 ? "s" : ""}`;
+  }
+  const averageDaysPerMonth = 365.25 / 12;
+  const months = Math.round(days / averageDaysPerMonth);
+  return `In ${months} month${months > 1 ? "s" : ""}`;
 };
 
 /**

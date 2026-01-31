@@ -1,4 +1,4 @@
-import type { MonthCount } from "../data/mockFriends";
+import type { MonthCount } from "../utils/friendUtils";
 import { EmptyMonthContainer } from "./EmptyMonthContainer";
 import { FriendInfo } from "./FriendInfo";
 
