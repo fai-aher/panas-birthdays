@@ -7,17 +7,6 @@ export function Header() {
         <Cake className="w-8 h-8 text-primary" />
         <h2 className="text-foreground text-lg font-bold">Birthday Planner</h2>
       </div>
-      {/* <div className="flex items-center">
-        <div className="hidden md:flex items-stretch rounded-full h-10 bg-muted w-64">
-          <div className="flex items-center justify-center pl-4 text-muted-foreground">
-            <Search className="w-5 h-5" />
-          </div>
-          <input
-            className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground px-3 text-sm focus:outline-none rounded-r-full"
-            placeholder="Search friends..."
-          />
-        </div>
-      </div> */}
     </header>
   );
 }
