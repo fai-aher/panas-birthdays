@@ -7,24 +7,19 @@ interface FriendInfoProps {
 
 export function FriendInfo({ friend }: FriendInfoProps) {
   return (
-    <div className="group flex items-center gap-3 p-2 rounded-lg hover:bg-card transition-all">
-      <div
-        className="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 ring-2 ring-background shrink-0"
-        style={{
-          backgroundImage: `url("${friend.profilePicture}")`,
-        }}
-        aria-label={`${friend.name}'s profile picture`}
-        role="img"
-      ></div>
-      <div className="flex-1 min-w-0">
-        <p className="text-foreground text-sm font-semibold truncate">
-          {friend.name}
-        </p>
-        <p className="text-muted-foreground text-xs truncate">
+    <div className="group flex items-center gap-3 rounded-lg p-2">
+      <img
+        src={friend.profilePicture}
+        alt={`${friend.name}'s profile picture`}
+        className="ring-background h-10 w-10 shrink-0 rounded-full object-cover ring-2"
+      />
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-semibold">{friend.name}</p>
+        <p className="text-secondary truncate text-xs">
           Turning {calculateNextAge(friend)}
         </p>
       </div>
-      <div className="shrink-0 bg-primary/10 text-primary px-2 py-1 rounded text-xs font-bold">
+      <div className="bg-primary/10 text-primary shrink-0 rounded px-2 py-1 text-xs font-bold">
         {String(friend.birthDate.getDate()).padStart(2, "0")}
       </div>
     </div>
