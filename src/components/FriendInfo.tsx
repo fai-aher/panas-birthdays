@@ -1,25 +1,42 @@
-import type { Friend } from "../data/mockFriends";
-import { calculateNextAge } from "../utils/friendUtils";
+import { mockFriends, type Friend } from "../data/mockFriends";
+import {
+  calculateNextAge,
+  daysUntilBirthday,
+  getNextBirthdayFriend,
+  getRelativeBirthdayText,
+} from "../utils/friendUtils";
 
 interface FriendInfoProps {
   friend: Friend;
 }
 
 export function FriendInfo({ friend }: FriendInfoProps) {
+  const isNextBirthday = getNextBirthdayFriend(mockFriends)!.id === friend.id;
+
   return (
-    <div className="group flex items-center gap-3 rounded-lg p-2">
+    <div
+      className={`group flex items-center gap-3 rounded-lg p-2 ${isNextBirthday ? "border-muted border bg-white" : ""}`}
+    >
       <img
         src={friend.profilePicture}
         alt={`${friend.name}'s profile picture`}
-        className="ring-background h-10 w-10 shrink-0 rounded-full object-cover ring-2"
+        className={`h-10 w-10 shrink-0 rounded-full object-cover ring-2 ${isNextBirthday ? "ring-primary" : "ring-background"}`}
       />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold">{friend.name}</p>
-        <p className="text-secondary truncate text-xs">
-          Turning {calculateNextAge(friend)}
-        </p>
+        {isNextBirthday ? (
+          <p className="text-primary truncate text-xs font-semibold">
+            {getRelativeBirthdayText(daysUntilBirthday(friend))}
+          </p>
+        ) : (
+          <p className="text-secondary truncate text-xs">
+            Turning {calculateNextAge(friend)}
+          </p>
+        )}
       </div>
-      <div className="bg-primary/10 text-primary shrink-0 rounded px-2 py-1 text-xs font-bold">
+      <div
+        className={`shrink-0 rounded px-2 py-1 text-xs font-bold ${isNextBirthday ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}
+      >
         {String(friend.birthDate.getDate()).padStart(2, "0")}
       </div>
     </div>
