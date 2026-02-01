@@ -1,6 +1,6 @@
-import type { MonthCount } from "../utils/friendUtils";
+import type { MonthCount } from "../../types";
+import { FriendInfo } from "../ui/FriendInfo";
 import { EmptyMonthContainer } from "./EmptyMonthContainer";
-import { FriendInfo } from "./FriendInfo";
 
 interface MonthContainerProps {
   monthBirthdays: MonthCount;
