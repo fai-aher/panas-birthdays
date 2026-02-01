@@ -1,8 +1,8 @@
-import { CalendarContainer } from "./components/CalendarContainer";
-import { Header } from "./components/Header";
-import { MetricCardContainer } from "./components/MetricCardContainer";
+import { CalendarContainer } from "./components/containers/CalendarContainer";
+import { MetricCardContainer } from "./components/containers/MetricCardContainer";
+import { Header } from "./components/ui/Header";
 
-function App() {
+export function App() {
   return (
     <>
       <Header />
@@ -13,5 +13,3 @@ function App() {
     </>
   );
 }
-
-export default App;

@@ -1,5 +1,5 @@
 import { Calendar, PartyPopper, TrendingUp, User } from "lucide-react";
-import { mockFriends } from "../data/mockFriends";
+import { friends } from "../../data/friends";
 import {
   daysUntilBirthday,
   getFriendsThisMonth,
@@ -7,19 +7,19 @@ import {
   getMostCommonAge,
   getNextBirthdayFriend,
   getRelativeBirthdayText,
-} from "../utils/friendUtils";
-import { MetricCard } from "./MetricCard";
+} from "../../utils/friendUtils";
+import { MetricCard } from "../ui/MetricCard";
 
 export function MetricCardContainer() {
-  const nextFriend = getNextBirthdayFriend(mockFriends);
-  const thisMonthCount = getFriendsThisMonth(mockFriends).length;
-  const mostCommonAge = getMostCommonAge(mockFriends);
-  const milestoneCount = getMilestoneCount(mockFriends);
+  const nextFriend = getNextBirthdayFriend(friends);
+  const thisMonthCount = getFriendsThisMonth(friends).length;
+  const mostCommonAge = getMostCommonAge(friends);
+  const milestoneCount = getMilestoneCount(friends);
 
   return (
     <section className="mx-auto grid max-w-400 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       <MetricCard title="Total Friends" icon={User}>
-        <p className="text-3xl font-bold">{mockFriends.length}</p>
+        <p className="text-3xl font-bold">{friends.length}</p>
       </MetricCard>
 
       <MetricCard title="Next Up" icon={PartyPopper}>

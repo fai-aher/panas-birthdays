@@ -1,17 +1,18 @@
-import { mockFriends, type Friend } from "../data/mockFriends";
+import { friends } from "../../data/friends";
+import type { Friend } from "../../types";
 import {
   calculateNextAge,
   daysUntilBirthday,
   getNextBirthdayFriend,
   getRelativeBirthdayText,
-} from "../utils/friendUtils";
+} from "../../utils/friendUtils";
 
 interface FriendInfoProps {
   friend: Friend;
 }
 
 export function FriendInfo({ friend }: FriendInfoProps) {
-  const isNextBirthday = getNextBirthdayFriend(mockFriends)!.id === friend.id;
+  const isNextBirthday = getNextBirthdayFriend(friends)!.id === friend.id;
 
   return (
     <div
