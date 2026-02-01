@@ -8,10 +8,14 @@ interface MetricCardProps {
 
 export function MetricCard({ title, icon: Icon, children }: MetricCardProps) {
   return (
-    <div className="flex flex-col gap-2 rounded-xl p-5 bg-white/60 backdrop-blur-sm border border-white/50 shadow-sm">
-      <div className="flex justify-between items-start">
-        <p className="text-muted-foreground text-sm font-medium">{title}</p>
-        <Icon className="text-primary bg-primary/10 p-1 rounded-lg" size={32} />
+    <div className="flex flex-col gap-2 rounded-xl border border-white/50 bg-white p-5 shadow-sm backdrop-blur-sm">
+      <div className="flex items-start justify-between">
+        <p className="text-secondary text-sm font-medium">{title}</p>
+        <Icon
+          color="var(--color-primary)"
+          size={32}
+          className="bg-primary/10 rounded-lg p-1"
+        />
       </div>
       {children}
     </div>

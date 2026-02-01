@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="p-6 flex-1 bg-secondary">
+      <main className="bg-surface flex-1 p-6">
         <MetricCardContainer />
         <CalendarContainer />
       </main>

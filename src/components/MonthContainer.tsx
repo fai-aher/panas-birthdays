@@ -8,19 +8,17 @@ interface MonthContainerProps {
 
 export function MonthContainer({ monthBirthdays }: MonthContainerProps) {
   return (
-    <div className="flex flex-col rounded-xl bg-white/60 backdrop-blur-sm border border-white/50 shadow-sm overflow-hidden h-100">
-      <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-card/50">
-        <h3 className="text-foreground text-lg font-bold">
-          {monthBirthdays.name}
-        </h3>
-        <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
+    <div className="flex h-100 flex-col overflow-hidden rounded-xl border border-white/50 bg-white shadow-sm backdrop-blur-sm">
+      <div className="border-muted flex items-center justify-between border-b px-4 py-3">
+        <h3 className="text-lg font-bold">{monthBirthdays.name}</h3>
+        <span className="text-secondary bg-muted rounded-full px-2 py-1 text-xs font-medium">
           {monthBirthdays.friends.length} B-days
         </span>
       </div>
       {monthBirthdays.friends.length === 0 ? (
         <EmptyMonthContainer />
       ) : (
-        <div className="flex-1 overflow-y-auto p-2 space-y-1">
+        <div className="flex-1 space-y-1 overflow-y-auto p-2">
           {monthBirthdays.friends.map((friend) => (
             <FriendInfo key={friend.id} friend={friend} />
           ))}
