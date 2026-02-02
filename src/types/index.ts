@@ -3,6 +3,7 @@ export interface Friend {
   name: string;
   profilePicture: string;
   birthDate: Date;
+  sex: "male" | "female";
 }
 
 export interface MonthCount {

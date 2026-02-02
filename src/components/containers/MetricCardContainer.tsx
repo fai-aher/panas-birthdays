@@ -24,12 +24,27 @@ export function MetricCardContainer() {
 
       <MetricCard title="Next Up" icon={PartyPopper}>
         {nextFriend ? (
-          <>
-            <p className="truncate text-xl font-bold">{nextFriend.name}</p>
-            <p className="text-primary text-sm font-semibold">
-              {getRelativeBirthdayText(daysUntilBirthday(nextFriend))}
-            </p>
-          </>
+          <div className="flex items-center gap-4">
+            <img
+              src={nextFriend.profilePicture}
+              alt={`${nextFriend.name}'s profile picture`}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src =
+                  nextFriend.sex === "male"
+                    ? "/pics/default-man.jpg"
+                    : "/pics/default-woman.jpg";
+              }}
+              className="border-primary h-12 w-12 shrink-0 rounded-full border-4 object-cover shadow-sm lg:h-16 lg:w-16"
+            />
+            <div className="flex flex-col">
+              <p className="truncate text-xl font-bold">{nextFriend.name}</p>
+              <p className="text-primary text-sm font-semibold">
+                {getRelativeBirthdayText(daysUntilBirthday(nextFriend))}
+              </p>
+            </div>
+          </div>
         ) : (
           <p className="text-secondary text-sm">No upcoming birthdays</p>
         )}
