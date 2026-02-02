@@ -21,6 +21,14 @@ export function FriendInfo({ friend }: FriendInfoProps) {
       <img
         src={friend.profilePicture}
         alt={`${friend.name}'s profile picture`}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.onerror = null;
+          target.src =
+            friend.sex === "male"
+              ? "/pics/default-man.jpg"
+              : "/pics/default-woman.jpg";
+        }}
         className={`h-10 w-10 shrink-0 rounded-full object-cover ring-2 ${isNextBirthday ? "ring-primary" : "ring-background"}`}
       />
       <div className="min-w-0 flex-1">
