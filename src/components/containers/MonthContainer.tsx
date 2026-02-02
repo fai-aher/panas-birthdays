@@ -16,8 +16,8 @@ export function MonthContainer({
 
   // Constants consistent with FriendInfo height + gap + padding
   const ITEM_HEIGHT = 60; // Approximate height of one friend item (40px img + padding/border)
-  const HEADER_HEIGHT = 58; // Header height
-  const PADDING_BOTTOM = 16; // Bottom padding
+  const HEADER_HEIGHT = 58;
+  const PADDING_BOTTOM = 16;
 
   const desktopMax = Math.min(globalMaxBirthdays, 6);
   const mobileMax = 6;
@@ -36,8 +36,8 @@ export function MonthContainer({
         } as React.CSSProperties
       }
       className={`flex h-auto w-full flex-col overflow-hidden rounded-xl border shadow-sm backdrop-blur-sm sm:h-[var(--desktop-height)] max-h-[var(--mobile-max-height)] sm:max-h-none ${isCurrentMonth
-          ? "border-primary/50 bg-white"
-          : "border-white/50 bg-white/60"
+        ? "border-primary/50 bg-white"
+        : "border-white/50 bg-white/60"
         }`}
     >
       <div
@@ -51,8 +51,8 @@ export function MonthContainer({
         </h3>
         <span
           className={`rounded-full px-2 py-1 text-xs font-medium ${isCurrentMonth
-              ? "bg-primary/10 text-primary"
-              : "bg-muted text-secondary"
+            ? "bg-primary/10 text-primary"
+            : "bg-muted text-secondary"
             }`}
         >
           {monthBirthdays.friends.length} B-days
