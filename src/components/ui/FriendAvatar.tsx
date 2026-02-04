@@ -14,7 +14,7 @@ export function FriendAvatar({
   src,
   alt,
   highlight = false,
-  fallbackSrc = "pics/default-user.png",
+  fallbackSrc = "/pics/default-user.png",
   size = "h-10 w-10",
   ringWidth = "ring-2",
   className = "",

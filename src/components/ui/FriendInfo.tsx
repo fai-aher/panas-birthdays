@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { friends } from "../../data/friends";
 import type { Friend } from "../../types";
 import {
@@ -15,65 +15,80 @@ interface FriendInfoProps {
 }
 
 export function FriendInfo({ friend }: FriendInfoProps) {
-  const isNextBirthday = getNextBirthdayFriend(friends)!.id === friend.id;
+  const isNextBirthday = getNextBirthdayFriend(friends)?.id === friend.id;
   const [isClicked, setIsClicked] = useState(false);
   const [rect, setRect] = useState<DOMRect | null>(null);
   const closeTimeoutRef = useRef<number | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  const startClosing = () => {
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const clearCloseTimeout = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  }, []);
+
+  const startClosing = useCallback(() => {
     setIsClosing(true);
     closeTimeoutRef.current = window.setTimeout(() => {
       setShouldRender(false);
       setIsClosing(false);
       setIsClicked(false);
-    }, 300); // Animation duration
-  };
+    }, 300);
+  }, []);
 
-  const clearCloseTimeout = () => {
-    if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  };
+  const handleMouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isClicked) {
+        clearCloseTimeout();
+        setIsClosing(false);
+        setRect(e.currentTarget.getBoundingClientRect());
+        setShouldRender(true);
+      }
+    },
+    [isClicked, clearCloseTimeout],
+  );
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isClicked) {
-      clearCloseTimeout();
-      setIsClosing(false);
-      setRect(e.currentTarget.getBoundingClientRect());
-      setShouldRender(true);
-    }
-  };
-
-  const handleCardEnter = () => {
+  const handleCardEnter = useCallback(() => {
     if (!isClicked) {
       clearCloseTimeout();
       setIsClosing(false);
       setShouldRender(true);
     }
-  };
+  }, [isClicked, clearCloseTimeout]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     if (!isClicked) {
       closeTimeoutRef.current = window.setTimeout(() => {
         startClosing();
       }, 100);
     }
-  };
+  }, [isClicked, startClosing]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    clearCloseTimeout();
-    setRect(e.currentTarget.getBoundingClientRect());
-    setShouldRender(true);
-    setIsClicked(true);
-    setIsClosing(false);
-  };
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      clearCloseTimeout();
+      setRect(e.currentTarget.getBoundingClientRect());
+      setShouldRender(true);
+      setIsClicked(true);
+      setIsClosing(false);
+    },
+    [clearCloseTimeout],
+  );
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     startClosing();
-  };
+  }, [startClosing]);
 
   return (
     <>
