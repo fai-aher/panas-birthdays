@@ -1,79 +1,94 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { friends } from "../../data/friends";
 import type { Friend } from "../../types";
-import { FriendHoverCard } from "./FriendHoverCard";
 import {
   calculateNextAge,
   daysUntilBirthday,
   getNextBirthdayFriend,
   getRelativeBirthdayText,
 } from "../../utils/friendUtils";
+import { FriendAvatar } from "./FriendAvatar";
+import { FriendHoverCard } from "./FriendHoverCard";
 
 interface FriendInfoProps {
   friend: Friend;
 }
 
 export function FriendInfo({ friend }: FriendInfoProps) {
-  const isNextBirthday = getNextBirthdayFriend(friends)!.id === friend.id;
+  const isNextBirthday = getNextBirthdayFriend(friends)?.id === friend.id;
   const [isClicked, setIsClicked] = useState(false);
   const [rect, setRect] = useState<DOMRect | null>(null);
   const closeTimeoutRef = useRef<number | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  const startClosing = () => {
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const clearCloseTimeout = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  }, []);
+
+  const startClosing = useCallback(() => {
     setIsClosing(true);
     closeTimeoutRef.current = window.setTimeout(() => {
       setShouldRender(false);
       setIsClosing(false);
       setIsClicked(false);
-    }, 300); // Animation duration
-  };
+    }, 300);
+  }, []);
 
-  const clearCloseTimeout = () => {
-    if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-  };
+  const handleMouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isClicked) {
+        clearCloseTimeout();
+        setIsClosing(false);
+        setRect(e.currentTarget.getBoundingClientRect());
+        setShouldRender(true);
+      }
+    },
+    [isClicked, clearCloseTimeout],
+  );
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isClicked) {
-      clearCloseTimeout();
-      setIsClosing(false);
-      setRect(e.currentTarget.getBoundingClientRect());
-      setShouldRender(true);
-    }
-  };
-
-  const handleCardEnter = () => {
+  const handleCardEnter = useCallback(() => {
     if (!isClicked) {
       clearCloseTimeout();
       setIsClosing(false);
       setShouldRender(true);
     }
-  };
+  }, [isClicked, clearCloseTimeout]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     if (!isClicked) {
       closeTimeoutRef.current = window.setTimeout(() => {
         startClosing();
       }, 100);
     }
-  };
+  }, [isClicked, startClosing]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    clearCloseTimeout();
-    setRect(e.currentTarget.getBoundingClientRect());
-    setShouldRender(true);
-    setIsClicked(true);
-    setIsClosing(false);
-  };
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      clearCloseTimeout();
+      setRect(e.currentTarget.getBoundingClientRect());
+      setShouldRender(true);
+      setIsClicked(true);
+      setIsClosing(false);
+    },
+    [clearCloseTimeout],
+  );
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     startClosing();
-  };
-
+  }, [startClosing]);
 
   return (
     <>
@@ -81,22 +96,14 @@ export function FriendInfo({ friend }: FriendInfoProps) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
-        className={`group relative flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-300 ease-in-out hover:bg-white hover:bg-opacity-50 ${isNextBirthday ? "border-muted bg-white" : ""
-          }`}
+        className={`group hover:bg-opacity-50 relative flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-300 ease-in-out hover:bg-white ${
+          isNextBirthday ? "border-muted bg-white" : ""
+        }`}
       >
-        <img
+        <FriendAvatar
           src={friend.profilePicture}
           alt={`${friend.name}'s profile picture`}
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null;
-            target.src =
-              friend.sex === "male"
-                ? "/pics/default-man.jpg"
-                : "/pics/default-woman.jpg";
-          }}
-          className={`h-10 w-10 shrink-0 rounded-full object-cover ring-2 ${isNextBirthday ? "ring-primary" : "ring-background"
-            }`}
+          highlight={isNextBirthday}
         />
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-semibold">{friend.name}</p>
@@ -111,10 +118,11 @@ export function FriendInfo({ friend }: FriendInfoProps) {
           )}
         </div>
         <div
-          className={`shrink-0 rounded px-2 py-1 text-xs font-bold ${isNextBirthday
-            ? "bg-primary text-white"
-            : "bg-primary/10 text-primary"
-            }`}
+          className={`shrink-0 rounded px-2 py-1 text-xs font-bold ${
+            isNextBirthday
+              ? "bg-primary text-white"
+              : "bg-primary/10 text-primary"
+          }`}
         >
           {String(friend.birthDate.getDate()).padStart(2, "0")}
         </div>

@@ -8,6 +8,7 @@ import {
   getNextBirthdayFriend,
   getRelativeBirthdayText,
 } from "../../utils/friendUtils";
+import { FriendAvatar } from "../ui/FriendAvatar";
 import { MetricCard } from "../ui/MetricCard";
 
 export function MetricCardContainer() {
@@ -25,18 +26,13 @@ export function MetricCardContainer() {
       <MetricCard title="Next Up" icon={PartyPopper}>
         {nextFriend ? (
           <div className="flex items-center gap-4">
-            <img
+            <FriendAvatar
               src={nextFriend.profilePicture}
               alt={`${nextFriend.name}'s profile picture`}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-                target.src =
-                  nextFriend.sex === "male"
-                    ? "/pics/default-man.jpg"
-                    : "/pics/default-woman.jpg";
-              }}
-              className="border-primary h-12 w-12 shrink-0 rounded-full border-4 object-cover shadow-sm lg:h-16 lg:w-16"
+              highlight={true}
+              size="h-12 w-12 lg:h-16 lg:w-16"
+              ringWidth="ring-0"
+              className="border-primary border-4 shadow-sm"
             />
             <div className="flex flex-col">
               <p className="truncate text-xl font-bold">{nextFriend.name}</p>
