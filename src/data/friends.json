@@ -3,77 +3,66 @@
     "id": "1",
     "name": "Sofia",
     "profilePicture": "pics/sofia.png",
-    "birthDate": "2003-01-17",
-    "sex": "female"
+    "birthDate": "2003-01-17"
   },
   {
     "id": "2",
     "name": "Dila",
     "profilePicture": "pics/dila.png",
-    "birthDate": "2002-01-27",
-    "sex": "male"
+    "birthDate": "2002-01-27"
   },
   {
     "id": "3",
     "name": "Gogo",
     "profilePicture": "pics/gogo.png",
-    "birthDate": "2002-02-20",
-    "sex": "male"
+    "birthDate": "2002-02-20"
   },
   {
     "id": "4",
     "name": "Paula",
     "profilePicture": "pics/paula.png",
-    "birthDate": "2003-03-08",
-    "sex": "female"
+    "birthDate": "2003-03-08"
   },
   {
     "id": "5",
     "name": "Puldo",
     "profilePicture": "pics/puldo.png",
-    "birthDate": "2002-07-08",
-    "sex": "male"
+    "birthDate": "2002-07-08"
   },
   {
     "id": "6",
     "name": "Fedi",
     "profilePicture": "pics/fedi.png",
-    "birthDate": "2003-07-08",
-    "sex": "male"
+    "birthDate": "2003-07-08"
   },
   {
     "id": "7",
     "name": "David",
     "profilePicture": "pics/profe_david.png",
-    "birthDate": "1995-07-18",
-    "sex": "male"
+    "birthDate": "1995-07-18"
   },
   {
     "id": "8",
     "name": "Mafe",
     "profilePicture": "pics/mafe.png",
-    "birthDate": "2006-08-04",
-    "sex": "female"
+    "birthDate": "2006-08-04"
   },
   {
     "id": "9",
     "name": "Rorro",
     "profilePicture": "pics/rorro.png",
-    "birthDate": "2002-10-04",
-    "sex": "male"
+    "birthDate": "2002-10-04"
   },
   {
     "id": "10",
     "name": "Camila",
     "profilePicture": "pics/camila.png",
-    "birthDate": "2002-12-07",
-    "sex": "female"
+    "birthDate": "2002-12-07"
   },
   {
     "id": "11",
     "name": "Deniel",
     "profilePicture": "pics/deniel.png",
-    "birthDate": "2001-12-09",
-    "sex": "male"
+    "birthDate": "2001-12-09"
   }
 ]
