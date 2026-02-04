@@ -134,3 +134,15 @@ export const getMilestoneCount = (friends: Friend[]): number => {
     return milestones.includes(age);
   }).length;
 };
+
+export const getTodayBirthdays = (friends: Friend[]): Friend[] => {
+  const today = new Date();
+  const todayMonth = today.getMonth();
+  const todayDate = today.getDate();
+
+  return friends.filter((friend) => {
+    const birthMonth = friend.birthDate.getMonth();
+    const birthDate = friend.birthDate.getDate();
+    return birthMonth === todayMonth && birthDate === todayDate;
+  });
+};
