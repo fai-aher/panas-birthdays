@@ -7,11 +7,21 @@ import {
   getMostCommonAge,
   getNextBirthdayFriend,
   getRelativeBirthdayText,
+  getTodayBirthdays,
 } from "../../utils/friendUtils";
+import { BirthdayCelebration } from "../ui/BirthdayCelebration";
 import { FriendAvatar } from "../ui/FriendAvatar";
 import { MetricCard } from "../ui/MetricCard";
 
 export function MetricCardContainer() {
+  const todayBirthdays = getTodayBirthdays(friends);
+
+  // If there are birthdays today, show the celebration component
+  if (todayBirthdays.length > 0) {
+    return <BirthdayCelebration birthdayFriends={todayBirthdays} />;
+  }
+
+  // Otherwise, show the regular metrics
   const nextFriend = getNextBirthdayFriend(friends);
   const thisMonthCount = getFriendsThisMonth(friends).length;
   const mostCommonAge = getMostCommonAge(friends);
