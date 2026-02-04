@@ -4,7 +4,7 @@ import type { Friend } from "../../types";
 import {
   calculateNextAge,
   daysUntilBirthday,
-  getNextBirthdayFriend,
+  getFriendsThisMonth,
   getRelativeBirthdayText,
 } from "../../utils/friendUtils";
 import { FriendAvatar } from "./FriendAvatar";
@@ -15,7 +15,10 @@ interface FriendInfoProps {
 }
 
 export function FriendInfo({ friend }: FriendInfoProps) {
-  const isNextBirthday = getNextBirthdayFriend(friends)?.id === friend.id;
+  const friendsWithBirthdaysThisMonth = getFriendsThisMonth(friends);
+  const isNextBirthday = friendsWithBirthdaysThisMonth.some(
+    (f) => f.id === friend.id,
+  );
   const [isClicked, setIsClicked] = useState(false);
   const [rect, setRect] = useState<DOMRect | null>(null);
   const closeTimeoutRef = useRef<number | null>(null);
@@ -96,9 +99,8 @@ export function FriendInfo({ friend }: FriendInfoProps) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
-        className={`group hover:bg-opacity-50 relative flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-300 ease-in-out hover:bg-white ${
-          isNextBirthday ? "border-muted bg-white" : ""
-        }`}
+        className={`group hover:bg-opacity-50 relative flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-300 ease-in-out hover:bg-white ${isNextBirthday ? "border-muted bg-white" : ""
+          }`}
       >
         <FriendAvatar
           src={friend.profilePicture}
@@ -118,11 +120,10 @@ export function FriendInfo({ friend }: FriendInfoProps) {
           )}
         </div>
         <div
-          className={`shrink-0 rounded px-2 py-1 text-xs font-bold ${
-            isNextBirthday
+          className={`shrink-0 rounded px-2 py-1 text-xs font-bold ${isNextBirthday
               ? "bg-primary text-white"
               : "bg-primary/10 text-primary"
-          }`}
+            }`}
         >
           {String(friend.birthDate.getDate()).padStart(2, "0")}
         </div>
